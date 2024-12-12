@@ -1,4 +1,6 @@
-﻿using DriversAPI.Services;
+﻿using DriversAPI.Dtos;
+using DriversAPI.Models;
+using DriversAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DriversAPI.Controllers
@@ -25,6 +27,36 @@ namespace DriversAPI.Controllers
             var drivers = await _driverService.GetAllAsync();
 
             return Ok(drivers);
+
+        }
+
+        [HttpGet("{name}")]
+        public async Task<IActionResult> GetOneDriver(string name)
+        {
+
+            var driver = await _driverService.GetDriverByName(name);
+
+
+            if(driver == null)
+            {
+
+                return NotFound();
+
+            }
+
+            return Ok(driver);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddNewDriver([FromBody] DriverAdd driver)
+        {
+
+            var d = await _driverService.AddNewDriver(driver);
+
+            return CreatedAtAction("GetOneDriver", new { name = d.Name }, d);
+
+            
 
         }
 
