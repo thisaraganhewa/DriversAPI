@@ -2,6 +2,7 @@
 using DriversAPI.Models;
 using DriversAPI.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata.Ecma335;
 
 namespace DriversAPI.Controllers
 {
@@ -57,6 +58,47 @@ namespace DriversAPI.Controllers
             return CreatedAtAction("GetOneDriver", new { name = d.Name }, d);
 
             
+
+        }
+
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> updateDriver(string id, [FromBody] UpdateDriverDto driver)
+        {
+
+            var existingDriver = await _driverService.GetDriverById(id);
+
+            if(existingDriver == null)
+            {
+
+                return NotFound();
+
+            }
+
+            driver.Id = existingDriver.Id;
+
+            await _driverService.UpdateDriver(id, driver);
+
+            return NoContent();
+
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteOneDriver(string id)
+        {
+
+            var existingDriver = await _driverService.GetDriverById(id);
+
+            if(existingDriver == null)
+            {
+
+                return NotFound();
+
+            }
+
+            await _driverService.DeleteOneDriver(id);
+
+            return NoContent();
 
         }
 

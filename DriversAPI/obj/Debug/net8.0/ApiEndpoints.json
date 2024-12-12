@@ -27,6 +27,43 @@
   },
   {
     "ContainingType": "DriversAPI.Controllers.DriversController",
+    "Method": "updateDriver",
+    "RelativePath": "Api/Drivers/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "driver",
+        "Type": "DriversAPI.Dtos.UpdateDriverDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DriversAPI.Controllers.DriversController",
+    "Method": "DeleteOneDriver",
+    "RelativePath": "Api/Drivers/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DriversAPI.Controllers.DriversController",
     "Method": "GetOneDriver",
     "RelativePath": "Api/Drivers/{name}",
     "HttpMethod": "GET",

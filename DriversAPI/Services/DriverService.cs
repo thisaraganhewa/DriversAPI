@@ -39,6 +39,13 @@ namespace DriversAPI.Services
 
         }
 
+        public async Task<Drivers> GetDriverById(string id)
+        {
+
+            return await _driversCollection.Find(driver => driver.Id == id).FirstOrDefaultAsync();
+
+        }
+
         public async Task<Drivers> AddNewDriver(DriverAdd driverDto)
         {
 
@@ -59,6 +66,30 @@ namespace DriversAPI.Services
             //var d = await _driversCollection.Find(driver => driver.Id == driver.Id).FirstOrDefaultAsync();
 
             //return d;
+
+        }
+
+        public async Task UpdateDriver(string id, UpdateDriverDto updateDriverDto)
+        {
+
+            var driver = new Drivers()
+            {
+
+                Id = updateDriverDto.Id,
+                Name = updateDriverDto.Name,
+                Number = updateDriverDto.Number,
+                Team = updateDriverDto.Team,
+
+            };
+
+            await _driversCollection.ReplaceOneAsync(d => d.Id == id, driver);
+
+        }
+
+        public async Task DeleteOneDriver(string id)
+        {
+
+            await _driversCollection.DeleteOneAsync(d => d.Id == id);
 
         }
 
