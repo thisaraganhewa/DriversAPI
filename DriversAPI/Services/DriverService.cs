@@ -15,7 +15,7 @@ namespace DriversAPI.Services
 
             var mongoClient = new MongoClient(databaseSettings.Value.ConnectionString);
             //var mongoDb = new MongoClient(databaseSettings.Value.DatabaseName);
-            var mongoDb = mongoClient.GetDatabase(databaseSettings.Value.CollectionName);
+            var mongoDb = mongoClient.GetDatabase(databaseSettings.Value.DatabaseName);
             //var db = _mongoClient.GetDatabase(databaseSettings.Value.DatabaseName);
             _driversCollection = mongoDb.GetCollection<Drivers>(databaseSettings.Value.CollectionName);
 
