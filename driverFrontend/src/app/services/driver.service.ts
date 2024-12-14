@@ -1,24 +1,24 @@
-import { Injectable } from '@angular/core';
-import { Driver } from '../models/driver'; 
+// import { Injectable } from '@angular/core';
+// import { Driver } from '../models/driver'; 
 
-@Injectable({
-  providedIn: 'root'
-})
-export class DriverService {
+// @Injectable({
+//   providedIn: 'root'
+// })
+// export class DriverService {
 
-  constructor() { }
+//   constructor() { }
 
-  public getDriveres(): Driver[]{
+//   public getDriveres(): Driver[]{
 
-    let driver = new Driver();
+//     let driver = new Driver();
 
-    driver.id = 1;
-    driver.name = "lewis";
-    driver.number = "34";
-    driver.team = "petronas"
+//     driver.id = 1;
+//     driver.name = "lewis";
+//     driver.number = "34";
+//     driver.team = "petronas"
 
-    return [driver];
+//     return [driver];
 
-  }
+//   }
 
-}
+// }

@@ -1,8 +1,8 @@
-export class Driver{
+export interface Driver{
 
     id?: number;
-    name = "";
-    number = "";
-    team = "";
+    name: string;
+    number: number;
+    team: string;
 
 }
