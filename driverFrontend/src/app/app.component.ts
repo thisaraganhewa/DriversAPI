@@ -28,7 +28,11 @@ export class AppComponent {
 
   onFormSubmit(){
 
-    console.log(this.driverForm.value);
+    const addDriverRequest = {
+      name: this.driverForm.value.name,
+      number: this.driverForm.value.number,
+      team: this.driverForm.value.team
+    }
 
   }
 
