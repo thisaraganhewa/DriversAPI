@@ -4,7 +4,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Driver } from './models/driver';
 import { AsyncPipe } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +16,21 @@ export class AppComponent {
   title = 'driverFrontend';
   http = inject(HttpClient);
 
+  driverForm = new FormGroup({
+
+    name: new FormControl<string>(''),
+    number: new FormControl<number>(0),
+    team: new FormControl<string>('')
+
+  })
+
   drivers$ = this.getDriver();
+
+  onFormSubmit(){
+
+    console.log(this.driverForm.value);
+
+  }
 
   private getDriver(): Observable<Driver[]>{
 

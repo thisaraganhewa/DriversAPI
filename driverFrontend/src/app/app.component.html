@@ -1,6 +1,21 @@
 <div class=" flex h-screen">
   <div class="w-[50%]">
+    <form (ngSubmit)="onFormSubmit()" [formGroup]="driverForm">
 
+      <h1 class="py-10 font-extrabold text-5xl">Add Driver</h1>
+
+      <div class="mt-2">
+
+        <label for="name" class="font-bold">Name</label>
+        <input type="text" class="w-full p-2 border-2 rounded-sm mt-2" formControlName="name">
+
+      </div>
+
+      <div class="mt-2">
+         <button type="submit" class="bg-slate-800 transition duration-300 ease-in-out text-white px-4 py-2 rounded-sm w-full">Add</button>
+      </div>
+
+    </form>
   </div>
   <div class="w-[50%] overflow-auto">
 
