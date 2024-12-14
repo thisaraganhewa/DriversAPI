@@ -34,6 +34,15 @@ export class AppComponent {
       team: this.driverForm.value.team
     }
 
+    this.http.post('https://localhost:44386/Api/Drivers',addDriverRequest)
+    .subscribe({
+      next: (value) => {
+        console.log(value);
+        this.drivers$ = this.getDriver();
+        this.driverForm.reset();
+      }
+    })
+
   }
 
   private getDriver(): Observable<Driver[]>{
