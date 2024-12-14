@@ -1,16 +1,39 @@
-@if (drivers$ | async; as drivers){
+<div class=" flex h-screen">
+  <div class="w-[50%]">
 
-  @if(drivers.length){
+  </div>
+  <div class="w-[50%] overflow-auto">
 
-    @for(item of drivers; track $index){
-      <p>{{item.name}}</p>
+    @if (drivers$ | async; as drivers){
+
+      @if(drivers.length){
+    
+        <ul>
+          @for(item of drivers; track $index){
+            <li class="p-2 bg-slate-100 border-b-2 border-slate-200  group relative ">
+              
+              <div class="flex justify-between items-center">
+                <span class="font-light text-3xl">{{item.name}}</span>
+                <span class="font-light text-xl">{{item.team}}</span>
+                <span class="font-light text-3xl">{{item.number}}</span>
+                <button class="bg-red-500 text-white px-3 py-1 rounded shadow-xl hidden group-hover:block ">Delete</button>
+              </div>
+            </li>
+          }
+        </ul>
+    
+      }
+      @else{
+    
+        <p>No data found</p>
+    
+      }
+    
     }
 
-  }
-  @else{
+  </div>
+</div>
 
-    <p>No data found</p>
 
-  }
 
-}
+
