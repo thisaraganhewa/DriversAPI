@@ -16,6 +16,8 @@ export class AppComponent {
   title = 'driverFrontend';
   http = inject(HttpClient);
 
+
+  //submit new driver form data
   driverForm = new FormGroup({
 
     name: new FormControl<string>(''),
@@ -24,10 +26,22 @@ export class AppComponent {
 
   })
 
-  drivers$ = this.getDriver();
+  //update driver form data
+  driverUpdateForm = new FormGroup({
+
+    name: new FormControl<string>(''),
+    number: new FormControl<number>(0),
+    team: new FormControl<string>('')
+
+  })
+
+  //id to send to update
+  updateID: string = "";
+  drivers$ = this.getDriver();//display drivers
 
   onFormSubmit(){
 
+    //assigning the data to send through the url
     const addDriverRequest = {
       name: this.driverForm.value.name,
       number: this.driverForm.value.number,
@@ -45,6 +59,69 @@ export class AppComponent {
 
   }
 
+  //setting the input fields to display the value
+  onUpdateSet( id: string, name: string, number: number, team: string){
+
+
+    this.driverUpdateForm.patchValue({
+      name: name,
+      number: number,
+      team: team,
+    })
+
+
+    this.updateID = id;
+
+  }
+
+  // onUpdateSet( item: any ){
+
+  //   this.driverUpdateForm = {...item};
+
+  //   this.updateID = item.id;
+
+  // }
+
+  //update a driver
+  onUpdate(){
+
+    const updateDriverRequest = {
+
+      name: this.driverUpdateForm.value.name,
+      number: this.driverUpdateForm.value.number,
+      team: this.driverUpdateForm.value.team
+
+    }
+
+    this.http.put(`https://localhost:44386/Api/Drivers/${this.updateID}`, updateDriverRequest)
+    .subscribe({
+      next: (value) =>{
+
+        alert(`Driver ${updateDriverRequest.number} is updated`)
+        this.drivers$ = this.getDriver();
+
+      }
+    })
+
+  }
+
+  //delete a driver
+  onDelete(id: string){
+
+    console.log(id)
+
+    this.http.delete(`https://localhost:44386/Api/Drivers/${id}`)
+    .subscribe({
+      next: (value) => {
+        console.log(value);
+        alert('item deleted');
+        this.drivers$ = this.getDriver();
+      }
+    })
+
+  }
+
+  //display drivers
   private getDriver(): Observable<Driver[]>{
 
     return this.http.get<Driver[]>('https://localhost:44386/Api/Drivers');
